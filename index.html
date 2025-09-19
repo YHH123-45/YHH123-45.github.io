@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给最爱的老公 - 生日快乐</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: #d44d77;
+        }
+        
+        .container {
+            text-align: center;
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .heart-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 30px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .heart-container:hover {
+            transform: scale(1.05);
+        }
+        
+        .heart {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: #ff3e6e;
+            transform: rotate(45deg);
+            box-shadow: 0 0 50px rgba(255, 62, 110, 0.7);
+            animation: heartbeat 1.2s infinite;
+        }
+        
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: #ff3e6e;
+        }
+        
+        .heart:before {
+            top: -50%;
+            left: 0;
+        }
+        
+        .heart:after {
+            top: 0;
+            right: -50%;
+        }
+        
+        .heart-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+        }
+        
+        .message-box {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .message {
+            font-size: 22px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        
+        .counter {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff3e6e;
+            margin-top: 15px;
+        }
+        
+        .title {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #d44d77;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .footer {
+            margin-top: 30px;
+            font-size: 16px;
+            color: #888;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: rotate(45deg) scale(1); }
+            5% { transform: rotate(45deg) scale(1.1); }
+            10% { transform: rotate(45deg) scale(1); }
+            15% { transform: rotate(45deg) scale(1.1); }
+            20% { transform: rotate(45deg) scale(1); }
+            100% { transform: rotate(45deg) scale(1); }
+        }
+        
+        @media (max-width: 600px) {
+            .heart-container {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .message {
+                font-size: 18px;
+            }
+            
+            .title {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">❤️ 送给最爱的老公，生日快乐！ ❤️</h1>
+        
+        <div class="heart-container" id="heart">
+            <div class="heart"></div>
+            <div class="heart-text">点击我</div>
+        </div>
+        
+        <div class="message-box">
+            <p class="message" id="message">点击上面的爱心，查看我对你的爱意</p >
+            <p class="counter" id="counter">已表达爱意: 0 次</p >
+        </div>
+        
+        <p class="footer">永远爱你的老婆 ❤️</p >
+    </div>
+
+    <script>
+        // 三行情书库
+        const loveMessages = [
+            "每一天因你而美好，\n每一刻因你而甜蜜，\n此生有你，夫复何求。",
+            "你的微笑是我的阳光，\n你的拥抱是我的港湾，\n你的爱是我的一切。",
+            "春风十里不如你，\n夏阳满山不如你，\n秋雨绵绵不如你，冬雪皑皑不如你。",
+            "不想撞南墙了，\n只想撞进你的胸膛，\n和你地久天长。",
+            "一屋两人，\n三餐四季，\n万水千山，百年一心。",
+            "山河远阔，\n人间烟火，\n无一是你，无一不是你。",
+            "初见时惊鸿一瞥，\n热恋时细水长流，\n余生请多多指教。",
+            "你是我纸短情长的雨季，\n也是我往后余生的晴空万里，\n此生唯愿与你相伴。",
+            "浮世三千，吾爱有三：\n日、月与卿。\n日为朝，月为暮，卿为朝朝暮暮。",
+            "你的过去我来不及参与，\n你的未来我奉陪到底，\n生日快乐，我的爱人！"
+        ];
+        
+        let cl
